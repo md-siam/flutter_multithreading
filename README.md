@@ -1,5 +1,11 @@
-# flutter_multithreading
+<img src="screenshots/badges/built-with-love.svg" height="28px"/>&nbsp;&nbsp;
+<img src="screenshots/badges/flutter-dart.svg" height="28px" />&nbsp;&nbsp;
+<a href="https://choosealicense.com/licenses/mit/" target="_blank"><img src="screenshots/badges/license-MIT.svg" height="28px" /></a>&nbsp;&nbsp;
+<img src="screenshots/badges/Flutter-3.svg" height="28px" />&nbsp;&nbsp;
+<img src="screenshots/badges/dart-null_safety-blue.svg" height="28px"/>
 
+# Flutter Multithreading
+<img align="right" src="screenshots/app_store_icons/playstore.png" height="200"></img>
 A new Flutter project.
 
 ## Getting Started
