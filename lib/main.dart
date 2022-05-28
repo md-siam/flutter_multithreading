@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '1_basic/basic_implementation.dart';
+import 'routes.dart';
+
 
 void main() {
   return runApp(const MyApp());
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Multithreading',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const BasicImplementation(),
+      //home: const BasicImplementation(),
+      home: const MyBasicIsolateExample(),
     );
   }
 }
