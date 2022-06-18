@@ -62,17 +62,31 @@ class _BasicImplementationState extends State<BasicImplementation> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(count.toString()),
+            const Text(
+              'Use `break points` to check the performance of the application',
+              style: TextStyle(fontSize: 25),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 40),
+            Text(
+              count.toString(),
+              style: const TextStyle(
+                fontSize: 60,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 40),
             ElevatedButton(
-              child: const Text("Add"),
+              child: const Text("Normal Addition Loop"),
               onPressed: () async {
                 count++;
                 setState(() {});
               },
             ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: runCompute,
-              child: const Text("Add in Isolate"),
+              child: const Text("Isolate Addition Loop"),
             ),
           ],
         ),

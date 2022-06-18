@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
@@ -11,7 +12,10 @@ class MyBasicIsolateExample extends StatefulWidget {
 
 class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
   int sum = 0;
-  final TextStyle _textStyle = const TextStyle(fontSize: 25);
+  final TextStyle _textStyle = const TextStyle(
+    fontSize: 35,
+    fontWeight: FontWeight.bold,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +65,7 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
                         receivePort.sendPort,
                       );
                     } catch (e) {
-                      print('Error: $e');
+                      log('Error: $e');
                     }
 
                     receivePort.listen((calculatedSum) {
