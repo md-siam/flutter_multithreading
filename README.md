@@ -5,8 +5,10 @@
 <img src="screenshots/badges/dart-null_safety-blue.svg" height="28px"/>
 
 # Flutter Multithreading
+
 <img align="right" src="screenshots/app_store_icons/playstore.png" height="200"></img>
 This repo is for understanding multithreading implementation in flutter ecosystem. Flutter, in its core, is a single-threaded SDK. But there is an option of multithreading for developers. Useful links are available below:<br>
+
 1. Concurrency in Dart: https://dart.dev/guides/language/concurrency
 2. Details of Isolate-class: https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html
 
@@ -14,7 +16,4 @@ This repo is for understanding multithreading implementation in flutter ecosyste
 
 <img align="centre" src="screenshots/1_basic.gif" height="500"></img>
 &emsp;&emsp;&emsp;
-<img align="centre" src="screenshots/2_basic_2.gif" height="500"></img>
-
-
-
+<img align="centre" src="screenshots/2_basic_2(modified).gif" height="500"></img>

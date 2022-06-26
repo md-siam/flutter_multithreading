@@ -12,8 +12,9 @@ class MyBasicIsolateExample extends StatefulWidget {
 
 class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
   int sum = 0;
+  bool isMultithreadingOn = false;
   final TextStyle _textStyle = const TextStyle(
-    fontSize: 35,
+    fontSize: 26,
     fontWeight: FontWeight.bold,
   );
 
@@ -25,66 +26,76 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Sum: $sum', style: _textStyle),
-            const SizedBox(height: 60),
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.lightBlueAccent[100],
-                borderRadius: BorderRadius.circular(5.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  isMultithreadingOn
+                      ? Text('Multithreading: ON', style: _textStyle)
+                      : Text('Multithreading: OFF', style: _textStyle),
+                  Switch.adaptive(
+                    value: isMultithreadingOn,
+                    onChanged: (newValue) {
+                      setState(() {
+                        isMultithreadingOn = newValue;
+                      });
+                      log('isMultithreadingOn: $isMultithreadingOn');
+                    },
+                    activeTrackColor: Colors.lightGreenAccent,
+                    activeColor: Colors.green,
+                  ),
+                ],
               ),
+            ),
+            const SizedBox(height: 40),
+            Text('Sum: $sum', style: _textStyle),
+            const SizedBox(height: 100),
+            CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.lightBlueAccent[100],
               child: const CircularProgressIndicator(color: Colors.red),
             ),
             const SizedBox(height: 60),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
+            ElevatedButton(
+              onPressed: () async {
+                if (isMultithreadingOn) {
+                  final receivePort = ReceivePort(); // for Isolate.spawn()
+
+                  try {
+                    await Isolate.spawn(
+                      heavyTaskUsingIsolate,
+                      receivePort.sendPort,
+                    );
+                  } catch (e) {
+                    log('Error: $e');
+                  }
+
+                  receivePort.listen((calculatedSum) {
                     setState(() {
-                      sum = heavyTaskWithoutIsolate(1000000000);
+                      sum = calculatedSum;
                     });
-                    print(sum);
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Text(
-                      'Without\nIsolate',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                    print(calculatedSum);
+                  });
+                } else {
+                  setState(() {
+                    sum = heavyTaskWithoutIsolate(1000000000);
+                  });
+                  print(sum);
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+                shape: const StadiumBorder(),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Text(
+                  'Calculate',
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    final receivePort = ReceivePort(); // for Isolate.spawn()
-
-                    try {
-                      await Isolate.spawn(
-                        heavyTaskUsingIsolate,
-                        receivePort.sendPort,
-                      );
-                    } catch (e) {
-                      log('Error: $e');
-                    }
-
-                    receivePort.listen((calculatedSum) {
-                      setState(() {
-                        sum = calculatedSum;
-                      });
-                      print(calculatedSum);
-                    });
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Text(
-                      'Using\nIsolate',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
             const SizedBox(height: 30),
             ElevatedButton(
@@ -93,8 +104,12 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
                   sum = 0;
                 });
               },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+                shape: const StadiumBorder(),
+              ),
               child: const Text(
-                'Reset',
+                '↺ Reset',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
@@ -119,8 +134,8 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
   }
 }
 
-/// this method is outside from the main() function
-/// and will be used by: [Isolate.spawn()]
+/// this method is outside from the main() thread
+/// and will be using: [Isolate.spawn()]
 ///
 heavyTaskUsingIsolate(SendPort sendPort) {
   debugPrint('task started.. 😴');
