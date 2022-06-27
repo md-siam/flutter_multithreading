@@ -11,8 +11,8 @@ class MyBasicIsolateExample extends StatefulWidget {
 }
 
 class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
-  int sum = 0;
-  bool isMultithreadingOn = false;
+  int _sum = 0;
+  bool _isMultithreadingOn = false;
   final TextStyle _textStyle = const TextStyle(
     fontSize: 26,
     fontWeight: FontWeight.bold,
@@ -31,16 +31,16 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  isMultithreadingOn
+                  _isMultithreadingOn
                       ? Text('Multithreading: ON', style: _textStyle)
                       : Text('Multithreading: OFF', style: _textStyle),
                   Switch.adaptive(
-                    value: isMultithreadingOn,
+                    value: _isMultithreadingOn,
                     onChanged: (newValue) {
                       setState(() {
-                        isMultithreadingOn = newValue;
+                        _isMultithreadingOn = newValue;
                       });
-                      log('isMultithreadingOn: $isMultithreadingOn');
+                      log('isMultithreadingOn: $_isMultithreadingOn');
                     },
                     activeTrackColor: Colors.lightGreenAccent,
                     activeColor: Colors.green,
@@ -49,7 +49,7 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
               ),
             ),
             const SizedBox(height: 40),
-            Text('Sum: $sum', style: _textStyle),
+            Text('Sum: $_sum', style: _textStyle),
             const SizedBox(height: 100),
             CircleAvatar(
               radius: 30,
@@ -59,7 +59,7 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
             const SizedBox(height: 60),
             ElevatedButton(
               onPressed: () async {
-                if (isMultithreadingOn) {
+                if (_isMultithreadingOn) {
                   final receivePort = ReceivePort(); // for Isolate.spawn()
 
                   try {
@@ -73,15 +73,15 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
 
                   receivePort.listen((calculatedSum) {
                     setState(() {
-                      sum = calculatedSum;
+                      _sum = calculatedSum;
                     });
                     print(calculatedSum);
                   });
                 } else {
                   setState(() {
-                    sum = heavyTaskWithoutIsolate(1000000000);
+                    _sum = heavyTaskWithoutIsolate(1000000000);
                   });
-                  print(sum);
+                  print(_sum);
                 }
               },
               style: ElevatedButton.styleFrom(
@@ -101,7 +101,7 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  sum = 0;
+                  _sum = 0;
                 });
               },
               style: ElevatedButton.styleFrom(
