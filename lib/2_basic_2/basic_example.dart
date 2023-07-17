@@ -124,7 +124,7 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
   /// the Circular progress indicator
   ///
   int heavyTaskWithoutIsolate(int value) {
-    debugPrint('task started.. 😴');
+    debugPrint('task started without Isolate.. 😴');
     int sum = 0;
     for (int i = 0; i < value; i++) {
       sum += i;
@@ -138,7 +138,7 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
 /// and will be using: [Isolate.spawn()]
 ///
 heavyTaskUsingIsolate(SendPort sendPort) {
-  debugPrint('task started.. 😴');
+  debugPrint('task started with Isolate.. 😴');
   int sum = 0;
   for (int i = 0; i < 1000000000; i++) {
     sum += i;
