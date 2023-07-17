@@ -85,7 +85,7 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
+                backgroundColor: Colors.blue,
                 shape: const StadiumBorder(),
               ),
               child: const Padding(
@@ -105,7 +105,7 @@ class _MyBasicIsolateExampleState extends State<MyBasicIsolateExample> {
                 });
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
+                backgroundColor: Colors.blue,
                 shape: const StadiumBorder(),
               ),
               child: const Text(
