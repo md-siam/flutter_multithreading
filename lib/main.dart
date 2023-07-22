@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
       //home: const BasicImplementation(),
-      home: const MyBasicIsolateExample(),
+      // home: const MyBasicIsolateExample(),
+      home: const CounterApp(),
     );
   }
 }
