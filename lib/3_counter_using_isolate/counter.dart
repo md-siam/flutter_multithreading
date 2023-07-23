@@ -29,9 +29,9 @@ class _CounterAppState extends State<CounterApp> {
     );
   }
 
-  static void _increment(List<dynamic> arguments) {
-    final SendPort sendPort = arguments.first;
-    final int counter = arguments.last;
+  static void _increment(List<dynamic> args) {
+    final SendPort sendPort = args[0];
+    final int counter = args[1];
     sendPort.send(counter + 2);
   }
 
@@ -45,7 +45,7 @@ class _CounterAppState extends State<CounterApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text('Counter App'),
+        title: const Text('Counter App'),
       ),
       body: Center(
         child: Column(

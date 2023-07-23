@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       // home: const BasicImplementation(),
       // home: const MyBasicIsolateExample(),
-      // home: const CounterApp(),
-      home: const UsingCompute(),
+       home: const CounterApp(),
+      //home: const UsingCompute(),
     );
   }
 }
