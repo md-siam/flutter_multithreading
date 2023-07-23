@@ -17,3 +17,4 @@ This repo is for understanding multithreading implementation in flutter ecosyste
 <img align="centre" src="screenshots/1_basic.gif" height="500"></img>
 <img align="centre" src="screenshots/2_basic_2.gif" height="500"></img>
 <img align="centre" src="screenshots/3_counter_app.gif" height="500"></img>
+<img align="centre" src="screenshots/4_using_compute.gif" height="500"></img>

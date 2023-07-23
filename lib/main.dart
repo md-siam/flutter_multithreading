@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'routes.dart';
 
-
 void main() {
   return runApp(const MyApp());
 }
@@ -15,10 +14,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Multithreading',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      //home: const BasicImplementation(),
+      // home: const BasicImplementation(),
       // home: const MyBasicIsolateExample(),
-      home: const CounterApp(),
+      // home: const CounterApp(),
+      home: const UsingCompute(),
     );
   }
 }
-
