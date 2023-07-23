@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-Future<int> computeFactorial(int n) async {
+Future<int> _computeFactorial(int n) async {
   return await compute(_factorial, n);
 }
 
@@ -27,7 +27,7 @@ class _UsingComputeState extends State<UsingCompute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Compute')),
+      appBar: AppBar(title: const Text('Home Page')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +49,7 @@ class _UsingComputeState extends State<UsingCompute> {
             const SizedBox(height: 60),
             ElevatedButton(
               onPressed: () async {
-                final result = await computeFactorial(45);
+                final result = await _computeFactorial(45);
 
                 setState(() {
                   _factorial = result;
